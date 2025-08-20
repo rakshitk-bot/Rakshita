@@ -1,0 +1,28 @@
+# Water Quality Analysis - Machine Learning Model
+# Dataset Example: https://www.kaggle.com/datasets/adityakadiwal/water-potability
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+
+# Load dataset (CSV file of water quality data)
+# Make sure you download 'water_potability.csv' from Kaggle or any dataset source
+df = pd.read_csv("water_potability.csv")
+
+# Fill missing values with mean
+df = df.fillna(df.mean())
+
+# Features (X) and Target (y)
+X = df.drop("Potability", axis=1)   # All columns except Potability
+y = df["Potability"]                # 0 = Not Safe, 1 = Safe
+
+# Train-Test Split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Normalize features
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test =
